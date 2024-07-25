@@ -1,13 +1,11 @@
 import Currency from './3-currency';
 
 export default class Pricing {
-  /* eslint-disable */
   constructor(amount, currency) {
     this._currency = currency;
     this._amount = amount;
   }
 
-  // getter 
   get currency() {
     return this._currency;
   }
@@ -16,20 +14,18 @@ export default class Pricing {
     return this._amount;
   }
 
-  // setter
-  set currency(Currency) {
-    this._currency = Currency;
+  set currency(currency) {
+    this._currency = currency;
   }
 
-  set amount(Amount) {
-    this._amount = Amount;
+  set amount(amount) {
+    this._amount = amount;
   }
 
   displayFullPrice() {
-    return `${this._amount} ${this._currency.displayFullCurrency()}`; 
+    return `${this._amount} ${this._currency.getFullCurrencyDisplay()}`;
   }
 
-  // static that calculates the amount multiplied by the conversion rate
   static convertPrice(amount, conversionRate) {
     return amount * conversionRate;
   }
