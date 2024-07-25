@@ -1,30 +1,26 @@
-export default class Building() {
-  /* eslint-disable */
-  export default class Building() {
-  /* eslint-disable */
-  constructor(sqft) {
-    this._sqft = sqft;
-    if (this.constructor !== Building && this.evacuationWarningMessage === undefined) {
-      throw new Error('Class extending Building must override evacuationWarningMessage');
-    if (
-      this.constructor !== Building
-      && typeof this.evacuationWarningMessage !== 'function'
-    ) {
-      throw Error(
-	'Class extending Building must override evacuationWarningMessage',
-      );
-    }
 
+export default class Building {
+  constructor(sqft) {
+    if (new.target !== Building && new.target.prototype.evacuationWarningMessage === undefined) {
+      throw new Error('Class extending Building must override evacuationWarningMessage');
+    }
     this._sqft = sqft;
   }
 
-  // getter
   get sqft() {
     return this._sqft;
   }
 
-  // setter 
-  set sqft(newSqft) {
-    this._sqft = newSqft;
+  set sqft(sqft) {
+    if (sqft === undefined || sqft === null) {
+      throw new Error('sqft must be defined');
+    } else if (typeof sqft === 'string') {
+      throw new Error('sqft must be a number');
+    } else if (typeof sqft !== 'number' || sqft <= 0) {
+      throw new Error('sqft must be a positive number');
+    } else if (!Number.isFinite(sqft)) {
+      throw new Error('sqft must be a finite number');
+    }
+    this._sqft = Number(sqft);
   }
 }
